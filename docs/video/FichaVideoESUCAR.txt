@@ -1,0 +1,11 @@
+{
+  "archivo": "VideoESUCAR.mp4",
+  "duracion_segundos": 78,
+  "resolucion": "1280x720",
+  "fps": 24,
+  "formato": "MP4 / H.264 / yuv420p",
+  "bytes": 1291798,
+  "megabytes": 1.29,
+  "audio": "Sin locución; explicación mediante textos en pantalla",
+  "integridad": "Decodificación completa sin errores"
+}

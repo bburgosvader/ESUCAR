@@ -1,0 +1,51 @@
+00–04 s | Tu trabajo de título, paso a paso
+Aprende a usar la aplicación en un recorrido breve.
+Prototipo académico DSY1105
+
+04–10 s | Inicia sesión
+Ingresa el correo y la contraseña de tu cuenta local. Si es tu primera vez, selecciona Crear cuenta.
+Las cuentas pertenecen a este dispositivo.
+
+10–17 s | Crea tu cuenta
+Completa nombre, correo y contraseña de 8 a 128 caracteres. Confírmala y pulsa Crear cuenta.
+Los errores se indican junto a cada campo.
+
+17–23 s | Revisa tu próximo hito
+En Inicio verás los hitos aprobados, la próxima entrega y la fecha límite. Abre una etapa para continuar.
+El progreso se actualiza con la revisión docente.
+
+23–29 s | Explora la guía
+En Guía encontrarás las etapas de Trabajo de Título I, II y III. Selecciona la asignatura y abre el hito.
+Cada etapa incluye orientación, formato y pauta.
+
+29–35 s | Lee antes de comenzar
+Revisa la orientación metodológica y los criterios. Al final de la etapa, pulsa Comenzar esta etapa.
+Puedes llevar la fecha a tu calendario.
+
+35–43 s | Registra tu avance
+Marca los puntos completados y escribe tus notas. Los datos válidos se guardan automáticamente.
+Puedes vincular un documento de tu dispositivo.
+
+43–49 s | Marca el hito como enviado
+Completa toda la lista y pulsa Marcar como enviado. Confirma el registro de la entrega.
+Este estado es local: no envía archivos al docente.
+
+49–56 s | Revisa y retroalimenta
+En Ajustes, cambia a docente demo. Abre el hito enviado, agrega comentarios y aprueba o solicita correcciones.
+El perfil docente es una demostración académica.
+
+56–60 s | Comprueba el progreso
+Al aprobar un hito, el resumen de Inicio muestra el nuevo avance de la ruta académica.
+El estudiante puede consultar la retroalimentación.
+
+60–66 s | Resuelve tus dudas
+En Consultas, escribe una palabra como cita y filtra la categoría. La biblioteca puede leerse sin conexión.
+Son respuestas de una biblioteca, sin chatbot de IA.
+
+66–73 s | Organiza tus fechas
+En Ajustes, activa los recordatorios y autoriza las notificaciones. Usa Probar notificación para comprobarlas.
+También puedes configurar la fuente de FAQ.
+
+73–78 s | Aprende. Investiga. Avanza.
+Guías, entregas, consultas y seguimiento en un solo lugar. Para salir, abre Ajustes y pulsa Cerrar sesión.
+Tutorial con capturas renderizadas de la aplicación.

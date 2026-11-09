@@ -1,56 +1,93 @@
-# ESUCAR · Tutor Virtual
+# Tutor Virtual ESUCAR
 
-Aplicación Android escrita en **Kotlin**, preparada para **Android Studio**, basada en el caso académico DSY1105: acompañamiento de estudiantes en Trabajo de Título I, II y III.
+Aplicación móvil Android (**Kotlin + Android Views + Material 3**) que funciona como tutor virtual para Trabajo de Título I, II y III de la Escuela de Suboficiales de Carabineros de Chile (ESUCAR).
 
-## Equipo y planificación
+Guía al estudiante en la construcción de su trabajo, centraliza pautas y permite registrar avances y resolver dudas frecuentes, **incluso sin conexión**. Incluye revisión docente de demostración, aprobación de hitos y retroalimentación.
 
-- Integrante 1: pendiente de confirmar por el equipo.
-- Integrante 2: pendiente de confirmar por el equipo.
-- Número de equipo: pendiente de confirmar.
-- [Tablero Trello ESUCAR](https://trello.com/b/wgburVCk/esucar).
-- [Matriz completa de la rúbrica](docs/RUBRICA.md), [arquitectura MVVM](docs/ARQUITECTURA.md) y [planificación](docs/PLANIFICACION.md).
+> Proyecto académico **DSY1105 · Desarrollo de Aplicaciones Móviles**, Duoc UC · Evaluación Parcial 2 · Versión **1.3.0**. No es una aplicación oficial de la institución.
 
-La versión 1.1.0 completa las mejoras técnicas de la Evaluación Parcial 2. Quedan pendientes la identificación de integrantes, su participación real y las validaciones en dispositivo indicadas en la matriz. No se han realizado entregas en AVA.
+## Integrantes
 
-## Acceso local (1.2.0)
+| Nombre |
+|---|
+| Ignacio Moya |
+| Bryan Burgos |
+| Felipe Rios |
 
-La app incluye inicio de sesión, registro y cierre de sesión con avances separados por cuenta. Consulta [la guía de acceso local](docs/LOGIN.md) para crear tu primera cuenta y conocer su alcance.
+## Video explicativo
 
-## Diseño institucional y Material 3 (1.3.0)
+[![Ver tutorial de uso de ESUCAR](docs/video/VideoESUCAR.png)](docs/video/VideoESUCAR.mp4)
 
-La app utiliza el tema Material 3 y componentes de Google Material: botones, tarjetas, campos con errores, navegación inferior, casillas, interruptores e indicadores. Incorpora la paleta de referencia y el logotipo publicado en el sitio de Carabineros de Chile. Consulta [la matriz de los siete puntos y las fuentes visuales](docs/DISENO_MATERIAL3.md).
+[**Ver o descargar VideoESUCAR.mp4**](docs/video/VideoESUCAR.mp4)
 
-## Funcionalidades
+Tutorial de **78 segundos**, resolución **1280 × 720 (720p)**, formato **MP4/H.264** y peso **1,29 MB**. Presenta capturas renderizadas de la app con textos explicativos, sin locución.
 
-- Inicio con progreso, próximo hito y alertas de fechas vencidas.
-- MVVM con `TutorViewModel`, `StateFlow` y separación de datos, dominio, presentación y recursos nativos.
-- Formularios con iconos, mensajes por campo y validaciones centralizadas; conserva borradores al recrear la pantalla.
-- Transiciones de pantalla, barras animadas y retroalimentación de errores; respeta las animaciones desactivadas de Android.
-- Integración con calendario mediante un borrador de evento que el usuario confirma.
-- Seis etapas: planteamiento, marco teórico, diseño metodológico, recogida de información, análisis e informe final.
-- Orientación paso a paso, formato requerido y criterios de revisión por etapa.
-- Listas de avance, notas con guardado automático y documento local vinculado mediante el selector de Android.
-- Estados: por iniciar → en desarrollo → enviado → aprobado; el docente puede solicitar correcciones.
-- Perfil estudiante y perfil docente **de demostración**, intercambiables en Ajustes.
-- Docente: modificar fechas, formato y criterios; guardar retroalimentación y aprobar hitos enviados.
-- Buscador de 15 FAQ con categorías y búsqueda sin distinguir mayúsculas ni tildes.
-- Contenido y avance disponibles sin conexión.
-- Recordatorios locales con permiso de notificaciones en Android 13 o superior; reprogramación después del reinicio.
-- Actualización opcional de FAQ desde JSON HTTPS, manual y periódica con conectividad.
-- Diseño adaptable, área de lectura limitada en tabletas, texto escalable y controles de Android.
+Recorrido: registro e ingreso → inicio → guía → lista de avance y notas → registro de envío → revisión docente → consultas y recordatorios.
 
-## Abrir y ejecutar en Android Studio
+El archivo está incluido en el repositorio. [Guion](docs/video/GuionVideoESUCAR.txt) · [Ficha técnica](docs/video/FichaVideoESUCAR.txt).
 
-1. Clona este repositorio o descarga y descomprime el ZIP.
-2. En Android Studio selecciona **Open** y abre la carpeta que contiene `settings.gradle.kts`.
-3. Usa un JDK **17 o superior** como Gradle JDK (probado con JDK 21).
-4. Instala en SDK Manager **Android SDK Platform 37** y **Build Tools 36.0.0**. Android Studio detectará o creará `local.properties` con la ruta de tu SDK.
-5. Espera la sincronización de Gradle. Se necesita internet para descargar las dependencias por primera vez.
-6. Ejecuta la configuración **app** en un emulador o teléfono Android 8.0/API 26 o superior.
+## Funcionalidades implementadas
 
-Herramientas fijadas: Android Gradle Plugin 9.2.1 (Kotlin integrado), Gradle 9.4.1; compile/target SDK 37. Usa una versión de Android Studio compatible con AGP 9.2.1 o posterior. [Compatibilidad oficial de AGP 9.2](https://developer.android.com/build/releases/agp-9-2-0-release-notes).
+### Estudiante
 
-En Windows:
+- **Registro e ingreso:** validación por campo, confirmación de contraseña, mostrar/ocultar contraseña y sesión recordada.
+- **Cuentas locales:** contraseñas derivadas con PBKDF2 y sal aleatoria; avances separados por cuenta y cierre de sesión sin borrar los datos.
+- **Inicio:** hitos aprobados, próxima etapa, fecha de entrega y advertencias de vencimiento.
+- **Guía metodológica:** seis etapas, desde planteamiento hasta informe final, distribuidas en Trabajo de Título I, II y III.
+- **Etapas:** orientación, formato, criterios de revisión, checklist persistente y notas con guardado automático válido.
+- **Documentos:** vincular y abrir archivos con el selector de Android.
+- **Entregas:** Por iniciar → En desarrollo → Enviado → Aprobado. Enviado registra un estado local; no transmite archivos al profesor.
+- **Consultas:** 15 FAQ, búsqueda sin distinguir tildes/mayúsculas y filtro por categoría.
+- **Calendario:** abrir un borrador de evento de entrega para que el usuario lo confirme.
+- **Recordatorios:** alarmas y notificaciones locales con permiso, prueba de aviso y reprogramación tras reinicio.
+- **Contenidos:** guías y avances sin conexión; actualización opcional de FAQ desde JSON HTTPS.
+
+### Profesor guía (demostración)
+
+- Cambiar a docente desde **Ajustes**, dentro de la cuenta local.
+- Revisar un hito enviado, escribir retroalimentación y aprobar o solicitar correcciones.
+- Editar fecha, formato requerido y criterios de revisión de cada etapa.
+- Consultar el progreso actualizado después de la revisión.
+
+El cambio de perfil es una simulación académica, no una autorización institucional. No existen cuentas docentes remotas ni un servidor multiusuario.
+
+### Requisitos de la evaluación cubiertos
+
+| Requisito | Dónde |
+|---|---|
+| Diseño visual Material 3 | Tema Material 3, `ui/theme/`, botones, tarjetas, campos y navegación Material |
+| Formularios validados con iconos y mensajes | Login/registro, perfil, fecha, formato, criterios, notas, retroalimentación y URL |
+| Validaciones desacopladas | `domain/validacion/`, ViewModels y pruebas en `app/src/test/` |
+| Navegación funcional | `ui/navegacion/`, barra inferior y botón Atrás |
+| Gestión de estado MVVM | `TutorViewModel`, `LoginViewModel` y `StateFlow` |
+| Persistencia local | SharedPreferences: cuentas, sesión, avances y contenido |
+| Recursos nativos (3) | Documentos, notificaciones/AlarmManager y calendario (`nativo/`) |
+| Animaciones | Entrada de pantalla, barras de progreso, respuesta de errores e indicadores de carga |
+
+[Detalle de la rúbrica](docs/RUBRICA.md) · [Diseño Material 3 e identidad visual](docs/DISENO_MATERIAL3.md).
+
+## Cómo ejecutar
+
+### Requisitos
+
+- Android Studio compatible con **AGP 9.2.1** y **Gradle 9.4.1** (Wrapper incluido).
+- **JDK 17 o superior**, probado con JDK 21.
+- SDK Platform **37** y Build Tools **36.0.0**.
+- Teléfono o emulador **Android 8.0/API 26** o superior. Recomendado API 33+ para probar el permiso de notificaciones.
+
+### Pasos
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/bburgosvader/ESUCAR.git
+   ```
+
+2. Abre la carpeta `ESUCAR` con **Android Studio → File → Open**.
+3. Espera la sincronización de Gradle y configura la ruta del SDK si se solicita.
+4. Selecciona el dispositivo y ejecuta **app → Run**.
+
+En PowerShell:
 
 ```powershell
 .\gradlew.bat assembleDebug testDebugUnitTest lintDebug
@@ -58,77 +95,86 @@ En Windows:
 
 En macOS/Linux:
 
-```sh
+```bash
 chmod +x gradlew
 ./gradlew assembleDebug testDebugUnitTest lintDebug
 ```
 
-APK de prueba: `app/build/outputs/apk/debug/app-debug.apk`. No requiere claves privadas ni servicios externos. La firma debug es para desarrollo, no para publicar en Play Store.
+APK: `app/build/outputs/apk/debug/app-debug.apk`. La primera sincronización y las primeras pruebas necesitan internet para descargar dependencias y Android simulado de Robolectric.
 
-## Recorrido para presentar el MVP
+### Datos para probar
 
-1. En **Guía**, abre el planteamiento y pulsa **Comenzar esta etapa**.
-2. Revisa la orientación y la pauta, marca los cinco puntos y agrega una nota. Puedes vincular un documento.
-3. Pulsa **Marcar como enviado** y confirma el registro local.
-4. En **Ajustes**, cambia al perfil docente de demostración.
-5. Abre el mismo hito, registra retroalimentación y solicita correcciones o aprueba la entrega.
-6. Regresa a estudiante y comprueba el estado y el progreso del inicio.
-7. En **Consultas**, busca `citacion` o `metodologia` y filtra una categoría.
-8. Activa los recordatorios y usa **Probar notificación**. Cierra y vuelve a abrir la aplicación para comprobar la persistencia.
+- No hay credenciales predeterminadas. Selecciona **Primera vez · Crear cuenta** y registra nombre, correo y contraseña de **8–128 caracteres**.
+- Puedes utilizar un correo de prueba como `estudiante@example.org` y una contraseña creada por ti. La cuenta pertenece a ese dispositivo.
+- La primera cuenta recupera una sola vez el avance de versiones anteriores; las siguientes tienen datos separados.
+- Flujo completo: comenzar una etapa → completar checklist → agregar notas/documento → marcar enviado → cambiar a docente demo → aprobar/devolver → regresar a estudiante.
+- Para actualizar FAQ, guarda esta fuente en Ajustes y pulsa **Actualizar ahora**:
 
-## Actualización de contenidos
+  ```text
+  https://raw.githubusercontent.com/bburgosvader/ESUCAR/main/docs/faq-ejemplo.json
+  ```
 
-En Ajustes puede configurarse una URL HTTPS directa a un documento como [docs/faq-ejemplo.json](docs/faq-ejemplo.json). Después de publicar este repositorio puede usarse:
+> Las guías, pautas y fechas iniciales son de ejemplo. Deben validarse con el docente. El estado Enviado no reemplaza el canal de entrega de la asignatura.
+
+## Arquitectura
+
+Patrón **MVVM** con separación de responsabilidades e inyección manual:
 
 ```text
-https://raw.githubusercontent.com/bburgosvader/ESUCAR/main/docs/faq-ejemplo.json
+UI (Android Views/Material 3) → ViewModel → Repository → SharedPreferences
+             ↑                  │
+             └──── StateFlow ───┘
 ```
-
-Pulsa **Guardar fuente** y **Actualizar ahora**. Las FAQ recibidas se agregan a la biblioteca base y quedan guardadas sin conexión. La siguiente actualización reemplaza el conjunto remoto anterior. No se transmiten notas, documentos ni estados. Se conservan los contenidos anteriores si la descarga falla. El archivo debe contener entre 1 y 200 preguntas y no superar 1 MB. Solo se aceptan respuestas HTTP 200, sin redirecciones.
-
-Android intentará actualizar cada seis horas con conexión; el sistema puede posponerlo por batería. No hay servidor institucional incluido. La fuente viene vacía de forma intencionada para que el docente elija el contenido autorizado.
-
-## Recordatorios
-
-Se programa un aviso aproximado a las 09:00 del día anterior a una entrega. Si ese momento ya pasó, se intenta a las 09:00 de la fecha de entrega. No se programan avisos retroactivos ni para estados enviado/aprobado. Android puede retrasar alarmas inexactas; no se solicita permiso de alarmas exactas. Tras forzar detención, vuelve a abrir la aplicación para reprogramarlas. Es necesario permitir notificaciones.
-
-## Estructura
 
 ```text
 app/src/main/java/cl/esucar/tutor/
-MainActivity.kt              Punto de entrada (6 líneas)
-TutorApp.kt                  Inicio y contenedor de la aplicación
-data/
-  local/Catalog.kt           Guías y FAQ incluidas
-  repository/Repository.kt  Persistencia local
-  remote/ContentSyncService.kt  Actualización HTTPS
-di/AppContainer.kt          Construcción e inyección de dependencias
-domain/
-  model/Domain.kt            Modelos y reglas de estados
-  repository/TutorStore.kt   Contrato del repositorio
-  validacion/FormValidator.kt  Validaciones puras
-nativo/                     Documentos, calendario y notificaciones
-ui/
-  components/               Campos, controles y animaciones compartidas
-  estudiante/               InicioScreen, GuiaScreen, EtapaScreen, AyudaScreen
-  profesor/RevisionScreen.kt  Formulario y revisión docente
-  perfil/PerfilScreen.kt     Perfil y ajustes
-  navegacion/               Host de pantallas, navegación y ViewModel
-  theme/TutorTheme.kt        Paleta de colores
+├── MainActivity.kt          Punto de entrada Android
+├── TutorApp.kt              Application y contenedor
+├── di/AppContainer.kt       Inyección manual de dependencias
+├── domain/
+│   ├── model/              Modelos y reglas de estados
+│   ├── repository/         Contrato TutorStore
+│   ├── validacion/         Formularios y credenciales
+│   └── seguridad/          Derivación/verificación de contraseñas
+├── data/
+│   ├── local/              Catálogo metodológico y FAQ
+│   ├── repository/         Autenticación, sesión y persistencia
+│   └── remote/             HTTPS y JobScheduler
+├── nativo/                 Documentos, calendario y recordatorios
+└── ui/
+    ├── auth/               Ingreso y registro
+    ├── components/         Campos, tarjetas, animaciones e identidad
+    ├── estudiante/         Inicio, guía, etapa y consultas
+    ├── profesor/           Revisión y edición de pauta/fecha
+    ├── perfil/             Cuenta, ajustes y cierre de sesión
+    ├── navegacion/         Host, navegación y estado académico
+    └── theme/              Paleta institucional de referencia
 ```
 
-Se usa ComponentActivity de AndroidX y vistas nativas, ViewModel/StateFlow para la lógica y estado, SharedPreferences para el pequeño conjunto local y JobScheduler/AlarmManager del sistema. La interfaz está en español. No se requieren Firebase ni claves API. Las pruebas de integración usan Robolectric 4.17 y descargan su Android simulado en la primera ejecución.
+**Tecnologías:** Kotlin integrado en AGP 9.2.1 · Android Views · Material Components 1.14.0 con tema Material 3 · AndroidX Activity/Lifecycle/ViewModel · StateFlow/Coroutines · SharedPreferences · AlarmManager · JobScheduler · JUnit 4 · Robolectric 4.17.
 
-## Alcance y limitaciones
+## Documentación
 
-Este es un **MVP académico**, no una aplicación oficial de ESUCAR ni de Carabineros de Chile. Las guías, rúbricas y fechas iniciales son ilustrativas: el caso no entregó pautas oficiales, ponderaciones ni calendario. El docente debe validarlas antes de uso real.
+| Documento | Para qué sirve |
+|---|---|
+| [Arquitectura](docs/ARQUITECTURA.md) | Capas, paquetes, estado y dependencias |
+| [Rúbrica](docs/RUBRICA.md) | Evidencias por indicador y pendientes académicos |
+| [Planificación](docs/PLANIFICACION.md) | Seguimiento de tareas y equipo |
+| [Pruebas](docs/PRUEBAS.md) | Cobertura automatizada y revisión manual |
+| [Acceso local](docs/LOGIN.md) | Registro, sesión, aislamiento y alcance |
+| [Diseño Material 3](docs/DISENO_MATERIAL3.md) | Siete requisitos, colores y origen del logo |
+| [Video explicativo](docs/video/VideoESUCAR.mp4) | Tutorial de uso de 78 segundos |
 
-Los perfiles son una simulación en un único dispositivo, con autenticación local y avances separados por cuenta. **Enviado** registra un estado local: no manda el documento al profesor. El tutor es una biblioteca consultable, no un modelo de IA. Los documentos se vinculan por URI; si el proveedor retira acceso o elimina el archivo, hay que volver a vincularlo. No hay sincronización de avances entre dispositivos, entrega remota, calificaciones oficiales ni respaldo en nube. Para un despliegue real se necesitarían identidad, autorización y un backend institucional.
+## Planificación y verificación
 
-No incluyas datos personales u operativos sensibles en la demostración. El repositorio no contiene el PDF original, credenciales, almacenes de claves ni configuraciones privadas de la máquina.
+**Tablero del equipo:** [Trello ESUCAR](https://trello.com/b/wgburVCk/esucar).
 
-## Verificación
+El proyecto compila, cuenta con **36 pruebas aprobadas** y **cero errores de lint**. Se revisaron capturas de Android simulado. Quedan por validar en hardware los permisos y servicios nativos, TalkBack y el comportamiento en teléfono/tableta antes de la defensa.
 
-Versión 1.3.0: APK debug generado, **36 pruebas aprobadas** (23 de lógica/estado, 12 de integración y 1 de renderizado visual con Android API 35 simulado) y **0 errores de lint**. No se ocultaron las advertencias con una baseline. Se comprobaron campos inválidos y recuperación, borradores al recrear Activity, entrega/aprobación, persistencia, permisos de notificaciones y los intents de documentos/calendario.
+El tablero distingue implementación verificada, pruebas pendientes en dispositivo y gestiones de entrega. La participación real de los tres integrantes debe evidenciarse con sus aportes y revisiones.
 
-El emulador no pudo arrancar por la configuración de aceleración de Windows. Las pruebas Robolectric no reemplazan la verificación de hardware: quedan por ejecutar los casos manuales de [docs/PRUEBAS.md](docs/PRUEBAS.md). El APK puede probarse en un teléfono Android 8.0 o superior.
+## Contexto del caso
+
+Caso académico DSY1105 del CITT Duoc UC para acompañar el Trabajo de Título en ESUCAR. Busca reducir consultas repetitivas y mejorar el seguimiento de entregables con una herramienta móvil de acceso continuo.
+
+Los datos viven en el dispositivo, sin conexión con servidores institucionales. No hay sincronización de avances entre teléfonos ni calificaciones oficiales. Los recordatorios son aproximados y Android puede posponerlos para ahorrar batería. Desinstalar elimina las cuentas y sus datos.

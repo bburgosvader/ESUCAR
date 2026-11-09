@@ -9,7 +9,7 @@ Revisión de la versión 1.1.0 contra los siete indicadores del encargo. Este do
 | IE 2.2.1: validación desacoplada y estado | 10% | `FormValidator` puro, `TutorViewModel`, `TutorUiState`, `StateFlow` observado con ciclo de vida | Implementado. La Activity no determina reglas de validación; borradores y errores sobreviven recreación |
 | IE 2.2.2: animaciones funcionales | 10% | Entrada de pantallas, avance de barras, movimiento breve del campo inválido e indicador de actualización | Implementado. Respeta la desactivación de animaciones de Android; fluidez en hardware pendiente |
 | IE 2.3.1: modularidad y persistencia | 15% | Paquetes `domain`, `data`, `di`, `ui`, `nativo`; contrato `TutorStore`; SharedPreferences y documento vinculado por URI | Implementado. Integración de repositorio y persistencia comprobada; conserva las claves de la versión 1.0 |
-| IE 2.3.2: colaboración y control de versiones | 20% | Repositorio público, commits técnicos, [tablero Trello](https://trello.com/b/wgburVCk/esucar) y [planificación](PLANIFICACION.md) | Preparado, pero falta identificar integrantes, asignar responsables y evidenciar aportes reales de ambos. La asistencia automatizada no prueba participación grupal |
+| IE 2.3.2: colaboración y control de versiones | 20% | Repositorio público, commits técnicos, [tablero Trello](https://trello.com/b/wgburVCk/esucar) y [planificación](PLANIFICACION.md) | Integrantes confirmados; falta asignar responsables y evidenciar aportes reales de los tres. La asistencia automatizada no prueba participación grupal |
 | IE 2.4.1: dos o más recursos nativos | 15% | Selector de documentos (SAF), notificaciones locales y calendario del sistema | Tres integraciones. Pruebas de permisos/notificación e intents en Android simulado; interacción real con proveedor de archivos, calendario y alarmas pendiente |
 
 ## Formularios y reglas
@@ -29,7 +29,7 @@ Las reglas viven en dominio; `ValidatedField` solamente muestra resultados. Envi
 
 ## Pendientes que no puede sustituir el código
 
-- Nombres y apellidos de ambos integrantes y número de equipo: pendientes por indicación del usuario.
+- Integrantes confirmados: Ignacio Moya, Bryan Burgos y Felipe Rios. Número de equipo no informado.
 - Asignar miembros a las tarjetas y registrar contribuciones reales, revisiones y acuerdos. No se inventaron responsables ni actividad pasada.
 - Validar con el docente el contenido metodológico, los formatos y las fechas de ejemplo.
 - Probar en teléfono o emulador habilitado: permisos, proveedor de documentos, calendario, alarmas, fuente grande y TalkBack.
