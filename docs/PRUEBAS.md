@@ -43,3 +43,7 @@ Para uso real también se deben validar contenidos con el docente, accesibilidad
 ## Acceso local 1.2.0
 
 Ocho pruebas nuevas de credenciales, hash, formulario y sesión. Total: 35. Consulta [LOGIN.md](LOGIN.md) para cobertura y validación manual pendiente.
+
+## Material 3 · 1.3.0
+
+Se adaptaron las pruebas de interacción a BottomNavigationView y a los errores de TextInputLayout. Una prueba adicional exporta capturas de login e inicio con el renderizador nativo Android de Robolectric para revisión visual. Total: 36 pruebas. La revisión en hardware y con TalkBack permanece pendiente.

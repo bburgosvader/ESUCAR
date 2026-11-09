@@ -41,17 +41,21 @@ class AndroidIntegrationTest {
     private fun idle() { shadowOf(Looper.getMainLooper()).idle() }
     private fun descendants(view: View): List<View> = listOf(view) + if(view is ViewGroup) (0 until view.childCount).flatMap { descendants(view.getChildAt(it)) } else emptyList()
     private fun views(activity: MainActivity)=descendants(activity.window.decorView)
-    private fun click(activity: MainActivity,text: String) { views(activity).filterIsInstance<Button>().first { it.text.toString()==text }.performClick(); idle() }
+    private fun click(activity: MainActivity,text: String) { val button=views(activity).filterIsInstance<Button>().firstOrNull { it.text.toString()==text }
+        if(button!=null) button.performClick() else {
+            val nav=views(activity).filterIsInstance<com.google.android.material.bottomnavigation.BottomNavigationView>().first()
+            nav.selectedItemId=(0 until nav.menu.size()).map { nav.menu.getItem(it) }.first { it.title==text }.itemId
+        }; idle() }
     private fun field(activity: MainActivity,title: String)=views(activity).filterIsInstance<EditText>().first { it.contentDescription.toString()==title }
 
     @Test fun profileErrorsAppearBesideFieldAndValidDataPersists() {
         val controller=Robolectric.buildActivity(MainActivity::class.java).setup()
         val activity=controller.get(); idle(); click(activity,"Ajustes")
         field(activity,"Nombre para mostrar").setText(""); idle(); click(activity,"Guardar nombre")
-        assertNotNull(field(activity,"Nombre para mostrar").error)
+        assertNotNull(((field(activity,"Nombre para mostrar").parent.parent) as com.google.android.material.textfield.TextInputLayout).error)
         assertEquals("Estudiante",Repository(context).name)
         field(activity,"Nombre para mostrar").setText("Ana Pérez"); idle(); click(activity,"Guardar nombre")
-        assertNull(field(activity,"Nombre para mostrar").error)
+        assertNull(((field(activity,"Nombre para mostrar").parent.parent) as com.google.android.material.textfield.TextInputLayout).error)
         assertEquals("Ana Pérez",Repository(context).name)
         controller.pause().stop().destroy()
     }

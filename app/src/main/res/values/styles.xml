@@ -1,8 +1,23 @@
 <resources>
-    <style name="AppTheme" parent="android:style/Theme.Material.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.Light.NoActionBar">
         <item name="android:fontFamily">sans</item>
-        <item name="android:colorAccent">#006B54</item>
+        <item name="colorPrimary">@color/institution_primary</item>
+        <item name="colorOnPrimary">@color/institution_surface</item>
+        <item name="colorPrimaryContainer">@color/institution_container</item>
+        <item name="colorOnPrimaryContainer">@color/institution_on_container</item>
+        <item name="colorSecondary">@color/institution_dark</item>
+        <item name="colorOnSecondary">@color/institution_surface</item>
+        <item name="colorSecondaryContainer">@color/institution_container</item>
+        <item name="colorOnSecondaryContainer">@color/institution_on_container</item>
+        <item name="colorTertiary">@color/institution_accent</item>
+        <item name="colorOnTertiary">@color/institution_text</item>
+        <item name="colorSurface">@color/institution_surface</item>
+        <item name="colorOnSurface">@color/institution_text</item>
+        <item name="colorOnSurfaceVariant">@color/institution_muted</item>
+        <item name="colorOutline">@color/institution_outline</item>
+        <item name="colorError">@color/institution_error</item>
+        <item name="android:colorBackground">@color/institution_background</item>
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowBackground">#F4F7F5</item>
+        <item name="android:windowBackground">@color/institution_background</item>
     </style>
 </resources>

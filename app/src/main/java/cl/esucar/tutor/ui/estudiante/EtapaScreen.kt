@@ -70,7 +70,7 @@ internal fun TutorScreenHost.detail(stage: Stage) {
         card { box ->
             addText(box, "03  /  Lista de avance", 20f, ink, true)
             stage.steps.forEachIndexed { i, step ->
-                box.addView(CheckBox(this).apply {
+                box.addView(com.google.android.material.checkbox.MaterialCheckBox(this).apply {
                     text = step; textSize = 16f; setTextColor(ink); minHeight = dp(48); isChecked = i in p.checked; isEnabled = editable
                     setOnCheckedChangeListener { _, checked ->
                         vm.check(stage,i,checked)
@@ -80,7 +80,7 @@ internal fun TutorScreenHost.detail(stage: Stage) {
                 })
             }
             checklistLabel=label("Lista completada: ${p.checked.size}/${stage.steps.size}",14f,green,true).also { box.addView(it) }
-            checklistProgress=ProgressBar(this,null,android.R.attr.progressBarStyleHorizontal).apply { max=stage.steps.size; progress=p.checked.size }.also { box.addView(it) }
+            checklistProgress=com.google.android.material.progressindicator.LinearProgressIndicator(this).apply { max=stage.steps.size; progress=p.checked.size }.also { box.addView(it) }
             deliveryError=label(vm.ui.errors["delivery"].orEmpty(),14f,Color.rgb(160,32,32)).also { it.accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE; box.addView(it) }
             val notes = input(box,"Notas de trabajo",p.notes,true,"notes_${stage.id}",FieldKind.NOTES,"Opcional · máximo 2000 caracteres · guardado automático si es válido")
             notes.isEnabled = editable

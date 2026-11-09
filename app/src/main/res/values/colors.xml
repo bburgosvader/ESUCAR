@@ -1,0 +1,13 @@
+<resources>
+    <color name="institution_primary">#1D7D5F</color>
+    <color name="institution_dark">#1D5139</color>
+    <color name="institution_accent">#8AAA45</color>
+    <color name="institution_container">#E0EFDF</color>
+    <color name="institution_on_container">#153B28</color>
+    <color name="institution_background">#F4F7F3</color>
+    <color name="institution_surface">#FFFFFF</color>
+    <color name="institution_text">#192D22</color>
+    <color name="institution_muted">#4D6255</color>
+    <color name="institution_outline">#718578</color>
+    <color name="institution_error">#BA1A1A</color>
+</resources>

@@ -47,7 +47,7 @@ internal fun TutorScreenHost.navigate(destination: String) { vm.navigate(destina
 
 internal fun TutorScreenHost.render() {
         authFields.clear(); authError=null; fields.clear(); syncStatus=null; syncSpinner=null; syncButton=null; deliveryError=null; checklistLabel=null; checklistProgress=null
-        val root = column().apply { setBackgroundColor(Color.rgb(244, 247, 245)) }
+        val root = column().apply { setBackgroundColor(Color.rgb(244, 247, 243)) }
         root.setOnApplyWindowInsetsListener { view, insets ->
             if (android.os.Build.VERSION.SDK_INT >= 30) {
                 val bars = insets.getInsets(android.view.WindowInsets.Type.systemBars() or android.view.WindowInsets.Type.ime())
@@ -59,6 +59,7 @@ internal fun TutorScreenHost.render() {
             insets
         }
         val header = column().apply { setPadding(dp(24), dp(16), dp(24), dp(8)) }
+        institutionBrand(header)
         addText(header, "ESUCAR  /  TUTOR VIRTUAL", 13f, green, true)
         addText(header, if (vm.role == Role.STUDENT) "Tu trabajo de título, paso a paso." else "Panel docente · demostración", 15f, muted)
         root.addView(header)
@@ -72,15 +73,15 @@ internal fun TutorScreenHost.render() {
         if(auth.state.value.session==null) {
             setContentView(root); loginScreen(); UiAnimations.enter(content); return
         }
-        val nav = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; setBackgroundColor(Color.WHITE) }
-        listOf("Inicio", "Guía", "Consultas", "Ajustes").forEach { title ->
-            nav.addView(Button(this).apply {
-                text = title; isAllCaps = false; textSize = 12f; setPadding(0, dp(4), 0, dp(4)); minWidth = 0; minHeight = dp(56)
-                setTextColor(if (title == page) Color.WHITE else green)
-                backgroundTintList = android.content.res.ColorStateList.valueOf(if (title == page) green else Color.WHITE)
-                setOnClickListener { navigate(title) }
-            }, LinearLayout.LayoutParams(0, -2, 1f))
+        val nav=com.google.android.material.bottomnavigation.BottomNavigationView(this).apply {
+            labelVisibilityMode=com.google.android.material.navigation.NavigationBarView.LABEL_VISIBILITY_LABELED
+            setBackgroundColor(Color.WHITE)
         }
+        val destinations=listOf("Inicio","Guía","Consultas","Ajustes")
+        val icons=listOf(R.drawable.ic_home,R.drawable.ic_guide,R.drawable.ic_help,R.drawable.ic_settings)
+        destinations.forEachIndexed { index,title -> nav.menu.add(0,100+index,index,title).setIcon(icons[index]) }
+        nav.selectedItemId=100+destinations.indexOf(page).coerceAtLeast(0)
+        nav.setOnItemSelectedListener { item -> navigate(destinations[item.itemId-100]); true }
         root.addView(nav)
         setContentView(root)
         when (page) {

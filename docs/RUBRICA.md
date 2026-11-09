@@ -8,7 +8,7 @@ Revisión de la versión 1.1.0 contra los siete indicadores del encargo. Este do
 | IE 2.1.2: formularios, iconos y errores por campo | 15% | `ValidatedField`, iconos de edición, éxito y advertencia; campos nombre, notas, fecha, formato, criterios, retroalimentación, URL y búsqueda | Implementado. Pruebas de límites, errores visibles, recuperación al corregir y guardado válido |
 | IE 2.2.1: validación desacoplada y estado | 10% | `FormValidator` puro, `TutorViewModel`, `TutorUiState`, `StateFlow` observado con ciclo de vida | Implementado. La Activity no determina reglas de validación; borradores y errores sobreviven recreación |
 | IE 2.2.2: animaciones funcionales | 10% | Entrada de pantallas, avance de barras, movimiento breve del campo inválido e indicador de actualización | Implementado. Respeta la desactivación de animaciones de Android; fluidez en hardware pendiente |
-| IE 2.3.1: modularidad y persistencia | 15% | Paquetes `domain`, `data`, `presentation`, `device`; contrato `TutorStore`; SharedPreferences y documento vinculado por URI | Implementado. Integración de repositorio y persistencia comprobada; conserva las claves de la versión 1.0 |
+| IE 2.3.1: modularidad y persistencia | 15% | Paquetes `domain`, `data`, `di`, `ui`, `nativo`; contrato `TutorStore`; SharedPreferences y documento vinculado por URI | Implementado. Integración de repositorio y persistencia comprobada; conserva las claves de la versión 1.0 |
 | IE 2.3.2: colaboración y control de versiones | 20% | Repositorio público, commits técnicos, [tablero Trello](https://trello.com/b/wgburVCk/esucar) y [planificación](PLANIFICACION.md) | Preparado, pero falta identificar integrantes, asignar responsables y evidenciar aportes reales de ambos. La asistencia automatizada no prueba participación grupal |
 | IE 2.4.1: dos o más recursos nativos | 15% | Selector de documentos (SAF), notificaciones locales y calendario del sistema | Tres integraciones. Pruebas de permisos/notificación e intents en Android simulado; interacción real con proveedor de archivos, calendario y alarmas pendiente |
 
@@ -37,3 +37,7 @@ Las reglas viven en dominio; `ValidatedField` solamente muestra resultados. Envi
 - Realizar la entrega grupal en AVA y activar el enlace individual; no se enviaron entregas académicas ni se activaron enlaces desde este proyecto.
 
 El usuario indicó que el profesor no fijó fecha. El equipo debe confirmar y respetar el plazo final antes de entregar; esta versión no constituye una congelación académica automática del repositorio.
+
+## Actualización visual 1.3.0
+
+Se incorporó Material 3 con componentes reales de Google y la identidad visual de referencia. Consulta [DISENO_MATERIAL3.md](DISENO_MATERIAL3.md) para los siete puntos y los recursos institucionales utilizados.

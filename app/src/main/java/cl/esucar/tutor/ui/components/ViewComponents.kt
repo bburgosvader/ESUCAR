@@ -58,7 +58,7 @@ internal fun TutorScreenHost.addText(parent: LinearLayout, value: String, size: 
     }
 
 internal fun TutorScreenHost.button(parent: LinearLayout, title: String, primary: Boolean = false, action: () -> Unit) {
-        parent.addView(Button(this).apply {
+        parent.addView(com.google.android.material.button.MaterialButton(this).apply {
             text = title; isAllCaps = false; textSize = 15f; minHeight = dp(52)
             setTextColor(if (primary) Color.WHITE else green)
             backgroundTintList = android.content.res.ColorStateList.valueOf(if (primary) green else pale)
@@ -67,8 +67,13 @@ internal fun TutorScreenHost.button(parent: LinearLayout, title: String, primary
     }
 
 internal fun TutorScreenHost.card(parent: LinearLayout = content, tint: Int = Color.WHITE, block: (LinearLayout) -> Unit) {
-        val box = column().apply { setPadding(dp(18), dp(16), dp(18), dp(16)); background = bg(tint) }
-        parent.addView(box, LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(14) })
+        val surface=com.google.android.material.card.MaterialCardView(this).apply {
+            setCardBackgroundColor(tint); radius=dp(20).toFloat(); cardElevation=dp(1).toFloat()
+            strokeWidth=dp(1); strokeColor=Color.rgb(218,229,218)
+        }
+        val box = column().apply { setPadding(dp(18), dp(16), dp(18), dp(16)) }
+        surface.addView(box)
+        parent.addView(surface, LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(14) })
         block(box)
     }
 

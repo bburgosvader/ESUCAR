@@ -36,8 +36,8 @@ class AuthIntegrationTest {
         val controller=Robolectric.buildActivity(MainActivity::class.java).setup(); idle()
         children(controller.get().window.decorView).filterIsInstance<Button>().first { it.text=="Ingresar" }.performClick(); idle()
         val fields=children(controller.get().window.decorView).filterIsInstance<EditText>()
-        assertNotNull(fields.first { it.contentDescription=="Correo electrónico" }.error)
-        assertNotNull(fields.first { it.contentDescription=="Contraseña" }.error)
+        assertNotNull(((fields.first { it.contentDescription=="Correo electrónico" }.parent.parent) as com.google.android.material.textfield.TextInputLayout).error)
+        assertNotNull(((fields.first { it.contentDescription=="Contraseña" }.parent.parent) as com.google.android.material.textfield.TextInputLayout).error)
         controller.pause().stop().destroy()
     }
     @Test fun registrationPersistsSessionAndNeverStoresPlainPassword() {
@@ -69,7 +69,11 @@ class AuthIntegrationTest {
     @Test fun registrationUiEntersHomeAndLogoutReturnsToLogin() {
         val controller=Robolectric.buildActivity(MainActivity::class.java).setup(); idle()
         fun views()=children(controller.get().window.decorView)
-        fun click(title: String) { views().filterIsInstance<Button>().first { it.text==title }.performClick(); idle() }
+        fun click(title: String) { val button=views().filterIsInstance<Button>().firstOrNull { it.text==title }
+            if(button!=null) button.performClick() else {
+                val nav=views().filterIsInstance<com.google.android.material.bottomnavigation.BottomNavigationView>().first()
+                nav.selectedItemId=(0 until nav.menu.size()).map { nav.menu.getItem(it) }.first { it.title==title }.itemId
+            }; idle() }
         fun fill(title: String,value: String) { views().filterIsInstance<EditText>().first { it.contentDescription==title }.setText(value); idle() }
         click("Primera vez · Crear cuenta")
         fill("Nombre completo","Ana Pérez"); fill("Correo electrónico","ana@example.org")
@@ -78,7 +82,7 @@ class AuthIntegrationTest {
         val deadline=System.nanoTime()+10_000_000_000L
         while(AuthRepository(context).currentEmail==null && System.nanoTime()<deadline) { Thread.sleep(20); idle() }
         Thread.sleep(100); idle()
-        assertTrue(views().filterIsInstance<Button>().any { it.text=="Guía" })
+        assertTrue(views().any { it is com.google.android.material.bottomnavigation.BottomNavigationView })
         click("Ajustes"); click("Cerrar sesión")
         org.robolectric.shadows.ShadowAlertDialog.getLatestAlertDialog().getButton(android.app.AlertDialog.BUTTON_POSITIVE).performClick(); idle()
         assertNull(AuthRepository(context).currentEmail)

@@ -16,6 +16,10 @@ La versión 1.1.0 completa las mejoras técnicas de la Evaluación Parcial 2. Qu
 
 La app incluye inicio de sesión, registro y cierre de sesión con avances separados por cuenta. Consulta [la guía de acceso local](docs/LOGIN.md) para crear tu primera cuenta y conocer su alcance.
 
+## Diseño institucional y Material 3 (1.3.0)
+
+La app utiliza el tema Material 3 y componentes de Google Material: botones, tarjetas, campos con errores, navegación inferior, casillas, interruptores e indicadores. Incorpora la paleta de referencia y el logotipo publicado en el sitio de Carabineros de Chile. Consulta [la matriz de los siete puntos y las fuentes visuales](docs/DISENO_MATERIAL3.md).
+
 ## Funcionalidades
 
 - Inicio con progreso, próximo hito y alertas de fechas vencidas.
@@ -125,6 +129,6 @@ No incluyas datos personales u operativos sensibles en la demostración. El repo
 
 ## Verificación
 
-Versión 1.2.0: APK debug generado, **35 pruebas aprobadas** (23 de lógica/estado y 12 de integración con Android API 35 simulado) y **0 errores de lint**. No se ocultaron las advertencias con una baseline. Se comprobaron campos inválidos y recuperación, borradores al recrear Activity, entrega/aprobación, persistencia, permisos de notificaciones y los intents de documentos/calendario.
+Versión 1.3.0: APK debug generado, **36 pruebas aprobadas** (23 de lógica/estado, 12 de integración y 1 de renderizado visual con Android API 35 simulado) y **0 errores de lint**. No se ocultaron las advertencias con una baseline. Se comprobaron campos inválidos y recuperación, borradores al recrear Activity, entrega/aprobación, persistencia, permisos de notificaciones y los intents de documentos/calendario.
 
 El emulador no pudo arrancar por la configuración de aceleración de Windows. Las pruebas Robolectric no reemplazan la verificación de hardware: quedan por ejecutar los casos manuales de [docs/PRUEBAS.md](docs/PRUEBAS.md). El APK puede probarse en un teléfono Android 8.0 o superior.

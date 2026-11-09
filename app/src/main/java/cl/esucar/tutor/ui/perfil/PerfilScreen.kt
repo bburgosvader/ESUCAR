@@ -65,7 +65,7 @@ internal fun TutorScreenHost.settings() {
         card { box ->
             addText(box, "Recordatorios de entrega", 20f, ink, true)
             addText(box, "Aviso local a las 09:00 del día anterior; si ya pasó, se programa para las 09:00 del día de entrega. Android puede retrasarlo para ahorrar batería.", 15f, muted)
-            val toggle = Switch(this).apply {
+            val toggle = com.google.android.material.materialswitch.MaterialSwitch(this).apply {
                 text = "Activar recordatorios"; textSize = 16f; minHeight = dp(56); isChecked = vm.reminders
                 setOnCheckedChangeListener { _, enabled ->
                     vm.setReminders(enabled)
@@ -90,7 +90,7 @@ internal fun TutorScreenHost.settings() {
                 if(vm.saveEndpoint()) ContentSyncService.schedule(this) else focusFirstError()
             }
             syncStatus=label(vm.ui.syncMessage,14f,muted).also { it.accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE; box.addView(it) }
-            syncSpinner=ProgressBar(this).apply { isIndeterminate=true; contentDescription="Actualizando preguntas"; visibility=if(vm.ui.busy) View.VISIBLE else View.GONE }.also { box.addView(it,LinearLayout.LayoutParams(dp(40),dp(40))) }
+            syncSpinner=com.google.android.material.progressindicator.CircularProgressIndicator(this).apply { isIndeterminate=true; contentDescription="Actualizando preguntas"; visibility=if(vm.ui.busy) View.VISIBLE else View.GONE }.also { box.addView(it,LinearLayout.LayoutParams(dp(40),dp(40))) }
             button(box,"Actualizar ahora") {
                 val appContext=applicationContext
                 vm.synchronize { ContentSync.update(appContext) }

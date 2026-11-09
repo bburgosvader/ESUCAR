@@ -49,7 +49,7 @@ internal fun TutorScreenHost.home() {
         card(tint = green) { box ->
             addText(box, "MI RUTA ACADÉMICA", 12f, Color.WHITE, true)
             addText(box, "$approved de ${vm.stages.size} hitos aprobados", 25f, Color.WHITE, true)
-            box.addView(ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply {
+            box.addView(com.google.android.material.progressindicator.LinearProgressIndicator(this).apply {
                 max = vm.stages.size; UiAnimations.progress(this,approved)
                 progressTintList = android.content.res.ColorStateList.valueOf(Color.rgb(204, 230, 143))
                 contentDescription = "$approved de ${vm.stages.size} hitos aprobados"
