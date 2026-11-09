@@ -12,6 +12,10 @@ Aplicación Android escrita en **Kotlin**, preparada para **Android Studio**, ba
 
 La versión 1.1.0 completa las mejoras técnicas de la Evaluación Parcial 2. Quedan pendientes la identificación de integrantes, su participación real y las validaciones en dispositivo indicadas en la matriz. No se han realizado entregas en AVA.
 
+## Acceso local (1.2.0)
+
+La app incluye inicio de sesión, registro y cierre de sesión con avances separados por cuenta. Consulta [la guía de acceso local](docs/LOGIN.md) para crear tu primera cuenta y conocer su alcance.
+
 ## Funcionalidades
 
 - Inicio con progreso, próximo hito y alertas de fechas vencidas.
@@ -115,12 +119,12 @@ Se usa ComponentActivity de AndroidX y vistas nativas, ViewModel/StateFlow para 
 
 Este es un **MVP académico**, no una aplicación oficial de ESUCAR ni de Carabineros de Chile. Las guías, rúbricas y fechas iniciales son ilustrativas: el caso no entregó pautas oficiales, ponderaciones ni calendario. El docente debe validarlas antes de uso real.
 
-Los perfiles son una simulación en un único dispositivo, sin autenticación ni múltiples estudiantes. **Enviado** registra un estado local: no manda el documento al profesor. El tutor es una biblioteca consultable, no un modelo de IA. Los documentos se vinculan por URI; si el proveedor retira acceso o elimina el archivo, hay que volver a vincularlo. No hay sincronización de avances entre dispositivos, entrega remota, calificaciones oficiales ni respaldo en nube. Para un despliegue real se necesitarían identidad, autorización y un backend institucional.
+Los perfiles son una simulación en un único dispositivo, con autenticación local y avances separados por cuenta. **Enviado** registra un estado local: no manda el documento al profesor. El tutor es una biblioteca consultable, no un modelo de IA. Los documentos se vinculan por URI; si el proveedor retira acceso o elimina el archivo, hay que volver a vincularlo. No hay sincronización de avances entre dispositivos, entrega remota, calificaciones oficiales ni respaldo en nube. Para un despliegue real se necesitarían identidad, autorización y un backend institucional.
 
 No incluyas datos personales u operativos sensibles en la demostración. El repositorio no contiene el PDF original, credenciales, almacenes de claves ni configuraciones privadas de la máquina.
 
 ## Verificación
 
-Versión 1.1.0: APK debug generado, **27 pruebas aprobadas** (21 de lógica/estado y 6 de integración con Android API 35 simulado) y **0 errores de lint**. No se ocultaron las advertencias con una baseline. Se comprobaron campos inválidos y recuperación, borradores al recrear Activity, entrega/aprobación, persistencia, permisos de notificaciones y los intents de documentos/calendario.
+Versión 1.2.0: APK debug generado, **35 pruebas aprobadas** (23 de lógica/estado y 12 de integración con Android API 35 simulado) y **0 errores de lint**. No se ocultaron las advertencias con una baseline. Se comprobaron campos inválidos y recuperación, borradores al recrear Activity, entrega/aprobación, persistencia, permisos de notificaciones y los intents de documentos/calendario.
 
 El emulador no pudo arrancar por la configuración de aceleración de Windows. Las pruebas Robolectric no reemplazan la verificación de hardware: quedan por ejecutar los casos manuales de [docs/PRUEBAS.md](docs/PRUEBAS.md). El APK puede probarse en un teléfono Android 8.0 o superior.

@@ -40,12 +40,13 @@ import cl.esucar.tutor.ui.estudiante.*
 import cl.esucar.tutor.ui.perfil.*
 import cl.esucar.tutor.ui.profesor.*
 import cl.esucar.tutor.ui.theme.TutorTheme
+import cl.esucar.tutor.ui.auth.loginScreen
 import cl.esucar.tutor.R
 
 internal fun TutorScreenHost.navigate(destination: String) { vm.navigate(destination) }
 
 internal fun TutorScreenHost.render() {
-        fields.clear(); syncStatus=null; syncSpinner=null; syncButton=null; deliveryError=null; checklistLabel=null; checklistProgress=null
+        authFields.clear(); authError=null; fields.clear(); syncStatus=null; syncSpinner=null; syncButton=null; deliveryError=null; checklistLabel=null; checklistProgress=null
         val root = column().apply { setBackgroundColor(Color.rgb(244, 247, 245)) }
         root.setOnApplyWindowInsetsListener { view, insets ->
             if (android.os.Build.VERSION.SDK_INT >= 30) {
@@ -68,6 +69,9 @@ internal fun TutorScreenHost.render() {
         frame.addView(content, android.widget.FrameLayout.LayoutParams(maxWidth, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL))
         scroll.addView(frame)
         root.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
+        if(auth.state.value.session==null) {
+            setContentView(root); loginScreen(); UiAnimations.enter(content); return
+        }
         val nav = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; setBackgroundColor(Color.WHITE) }
         listOf("Inicio", "Guía", "Consultas", "Ajustes").forEach { title ->
             nav.addView(Button(this).apply {

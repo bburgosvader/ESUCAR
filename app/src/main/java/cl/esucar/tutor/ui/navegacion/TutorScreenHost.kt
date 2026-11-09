@@ -43,6 +43,9 @@ import cl.esucar.tutor.ui.theme.TutorTheme
 import cl.esucar.tutor.R
 
 open class TutorScreenHost : ComponentActivity() {
+    internal lateinit var auth: cl.esucar.tutor.ui.auth.LoginViewModel
+    internal val authFields=mutableMapOf<String,ValidatedField>()
+    internal var authError: TextView?=null
     internal lateinit var vm: TutorViewModel
     internal lateinit var content: LinearLayout
     internal val page get() = vm.ui.page
@@ -83,6 +86,7 @@ open class TutorScreenHost : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         vm = ViewModelProvider(this,(application as cl.esucar.tutor.TutorApp).container.viewModelFactory)[TutorViewModel::class.java]
+        auth=ViewModelProvider(this,(application as cl.esucar.tutor.TutorApp).container.viewModelFactory)[cl.esucar.tutor.ui.auth.LoginViewModel::class.java]
         savedInstanceState?.let { saved ->
             fun strings(key: String): Map<String,String> = saved.getBundle(key)?.let { b -> b.keySet().associateWith { b.getString(it).orEmpty() } } ?: emptyMap()
             vm.restore(TutorUiState(page=saved.getString("page","Inicio"),selected=saved.getString("selected"),
@@ -91,11 +95,26 @@ open class TutorScreenHost : ComponentActivity() {
             pickingStage=saved.getString("picking")
         }
         onBackPressedDispatcher.addCallback(this,object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() { if(!vm.back()) { isEnabled=false; onBackPressedDispatcher.onBackPressed() } }
+            override fun handleOnBackPressed() { if(auth.state.value.session==null || !vm.back()) { isEnabled=false; onBackPressedDispatcher.onBackPressed() } }
         })
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         Reminders.schedule(this)
         ContentSyncService.schedule(this)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                var signature: Triple<String?,Boolean,Boolean>?=null
+                auth.state.collect { state ->
+                    val next=Triple(state.session,state.register,state.busy)
+                    if(signature!=next) {
+                        if(signature!=null && signature?.first!=state.session) { vm.resetSession(); Reminders.schedule(this@TutorScreenHost); ContentSyncService.schedule(this@TutorScreenHost) }
+                        signature=next
+                        render()
+                    }
+                    authFields.forEach { (key,field) -> field.showResult(state.errors[key],state.errors.containsKey(key)) }
+                    authError?.text=state.message
+                }
+            }
+        }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 vm.state.collect { state ->

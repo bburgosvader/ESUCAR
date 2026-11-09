@@ -33,7 +33,11 @@ import java.time.LocalDate
 @Config(sdk=[35])
 class AndroidIntegrationTest {
     private val context get()=RuntimeEnvironment.getApplication()
-    @Before fun resetDemoData() { context.getSharedPreferences("tutor_v1",Context.MODE_PRIVATE).edit().clear().commit() }
+    @Before fun resetDemoData() {
+        context.getSharedPreferences("auth_v1",Context.MODE_PRIVATE).edit().clear().commit()
+        context.getSharedPreferences("tutor_v1",Context.MODE_PRIVATE).edit().clear().commit()
+        cl.esucar.tutor.data.repository.AuthRepository(context).register("Estudiante","fixture@example.org","Test12345!")
+    }
     private fun idle() { shadowOf(Looper.getMainLooper()).idle() }
     private fun descendants(view: View): List<View> = listOf(view) + if(view is ViewGroup) (0 until view.childCount).flatMap { descendants(view.getChildAt(it)) } else emptyList()
     private fun views(activity: MainActivity)=descendants(activity.window.decorView)

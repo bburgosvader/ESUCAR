@@ -45,6 +45,7 @@ class TutorViewModel(private val store: TutorStore) : ViewModel() {
     fun faqs() = store.faqs()
     fun searchResults() = if (ui.errors.containsKey("search")) emptyList() else faqs().filter { Rules.matches(it, ui.query, ui.category) }
     fun navigate(page: String, selected: String? = null) = update { it.copy(page=page,selected=selected,revision=it.revision+1) }
+    fun resetSession() { mutableState.value=TutorUiState(revision=ui.revision+1) }
     fun back(): Boolean {
         if (ui.selected != null) navigate("Guía") else if (ui.page != "Inicio") navigate("Inicio") else return false
         return true

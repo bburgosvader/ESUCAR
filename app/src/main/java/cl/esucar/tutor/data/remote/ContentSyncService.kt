@@ -13,7 +13,7 @@ import javax.net.ssl.HttpsURLConnection
 
 object ContentSync {
     fun update(context: Context): String {
-        val repo = Repository(context)
+        val repo = Repository(context,cl.esucar.tutor.data.repository.AuthRepository(context).dataFile)
         val address = repo.endpoint
         require(address.startsWith("https://")) { "Configura una URL HTTPS de contenidos." }
         val connection = URL(address).openConnection() as HttpsURLConnection
@@ -52,7 +52,7 @@ class ContentSyncService : JobService() {
         fun schedule(context: Context) {
             val scheduler = context.getSystemService(JobScheduler::class.java)
             scheduler.cancel(100)
-            if (Repository(context).endpoint.isNotBlank()) scheduler.schedule(JobInfo.Builder(100,
+            if (cl.esucar.tutor.data.repository.AuthRepository(context).currentEmail!=null && Repository(context).endpoint.isNotBlank()) scheduler.schedule(JobInfo.Builder(100,
                 ComponentName(context, ContentSyncService::class.java)).setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY)
                 .setPeriodic(6 * 60 * 60 * 1000L).setPersisted(true).build())
         }

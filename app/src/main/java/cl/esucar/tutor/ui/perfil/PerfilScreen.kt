@@ -44,14 +44,20 @@ import cl.esucar.tutor.R
 
 internal fun TutorScreenHost.settings() {
         addText(content, "Tu espacio de estudio", 28f, ink, true)
+        addText(content,auth.state.value.session.orEmpty(),14f,green)
+        button(content,"Cerrar sesión") {
+            AlertDialog.Builder(this).setTitle("Cerrar sesión")
+                .setMessage("Tus avances quedarán guardados en esta cuenta local.")
+                .setNegativeButton("Cancelar",null).setPositiveButton("Cerrar sesión") { _,_ -> auth.logout() }.show()
+        }
         card { box ->
-            addText(box, "Perfil de demostración", 20f, ink, true)
+            addText(box, "Tu cuenta", 20f, ink, true)
             val name = input(box,"Nombre para mostrar",vm.name,false,"name",FieldKind.NAME,"Obligatorio · de 2 a 60 caracteres")
             button(box, "Guardar nombre") {
                 if(!vm.saveName()) focusFirstError()
             }
             addText(box, "Perfil actual: ${if (vm.role == Role.STUDENT) "Estudiante" else "Docente"}", 16f, green, true)
-            addText(box, "Ambos perfiles comparten los datos locales para demostrar el flujo. No hay autenticación ni separación segura de cuentas.", 14f, muted)
+            addText(box, "La sesión pertenece a esta cuenta local. El cambio de perfil docente es una simulación; no acredita permisos institucionales.", 14f, muted)
             button(box, if (vm.role == Role.STUDENT) "Cambiar a docente (demo)" else "Cambiar a estudiante") {
                 vm.switchRole()
             }

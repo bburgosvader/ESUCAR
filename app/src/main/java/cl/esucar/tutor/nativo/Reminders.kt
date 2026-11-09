@@ -29,7 +29,7 @@ object Reminders {
             val pending = PendingIntent.getBroadcast(context, index, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
             alarms.cancel(pending)
             val p = repo.progress(stage)
-            if (repo.reminders && p.status != DeliveryStatus.APPROVED && p.status != DeliveryStatus.SUBMITTED) {
+            if (cl.esucar.tutor.data.repository.AuthRepository(context).currentEmail!=null && repo.reminders && p.status != DeliveryStatus.APPROVED && p.status != DeliveryStatus.SUBMITTED) {
                 val dayBefore = p.date.minusDays(1).atTime(9, 0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
                 val sameDay = p.date.atTime(9, 0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
                 val target = if (dayBefore > System.currentTimeMillis()) dayBefore else sameDay
@@ -52,7 +52,7 @@ class ReminderReceiver : BroadcastReceiver() {
         val repo = Repository(context)
         val stage = Catalog.stages.find { it.id == intent.getStringExtra("stage") } ?: return
         val p = repo.progress(stage)
-        if (repo.reminders && p.status != DeliveryStatus.APPROVED && p.status != DeliveryStatus.SUBMITTED && !p.date.isBefore(LocalDate.now())) {
+        if (cl.esucar.tutor.data.repository.AuthRepository(context).currentEmail!=null && repo.reminders && p.status != DeliveryStatus.APPROVED && p.status != DeliveryStatus.SUBMITTED && !p.date.isBefore(LocalDate.now())) {
             Reminders.show(context, stage.id.hashCode(), "Entrega: ${stage.title}", "Fecha límite: ${p.date}. Revisa tu lista de avance.")
         }
     }

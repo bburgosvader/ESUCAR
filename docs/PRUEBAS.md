@@ -39,3 +39,7 @@ Para uso real también se deben validar contenidos con el docente, accesibilidad
 16. Abrir calendario desde un hito: verificar título y fecha antes de guardar; cancelar no modifica el hito.
 17. Desactivar animaciones en Android y repetir navegación: todo debe seguir funcionando.
 18. Ejecutar con documento eliminado/proveedor sin acceso y notificaciones bloqueadas: mensajes recuperables, sin cierre inesperado.
+
+## Acceso local 1.2.0
+
+Ocho pruebas nuevas de credenciales, hash, formulario y sesión. Total: 35. Consulta [LOGIN.md](LOGIN.md) para cobertura y validación manual pendiente.

@@ -10,8 +10,8 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.time.LocalDate
 
-class Repository(context: Context) : TutorStore {
-    private val prefs = context.getSharedPreferences("tutor_v1", Context.MODE_PRIVATE)
+class Repository(private val context: Context,private val fixedDataFile: String?=null) : TutorStore {
+    private val prefs get() = context.getSharedPreferences(fixedDataFile ?: AuthRepository(context).dataFile, Context.MODE_PRIVATE)
     override var role: Role
         get() = Role.valueOf(prefs.getString("role", Role.STUDENT.name)!!)
         set(value) { prefs.edit().putString("role", value.name).apply() }
