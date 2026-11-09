@@ -1,4 +1,13 @@
-package cl.esucar.tutor
+package cl.esucar.tutor.nativo
+
+import cl.esucar.tutor.domain.model.*
+import cl.esucar.tutor.domain.validacion.*
+import cl.esucar.tutor.domain.repository.*
+import cl.esucar.tutor.data.local.Catalog
+import cl.esucar.tutor.data.repository.Repository
+import cl.esucar.tutor.data.remote.ContentSyncService
+import cl.esucar.tutor.MainActivity
+import cl.esucar.tutor.R
 
 import android.Manifest
 import android.app.*

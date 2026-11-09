@@ -1,5 +1,10 @@
 package cl.esucar.tutor
 
+import cl.esucar.tutor.domain.model.*
+import cl.esucar.tutor.domain.validacion.*
+import cl.esucar.tutor.domain.repository.*
+import cl.esucar.tutor.data.local.Catalog
+
 import org.junit.Assert.*
 import org.junit.Test
 import java.time.LocalDate

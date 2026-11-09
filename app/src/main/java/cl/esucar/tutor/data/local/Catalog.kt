@@ -1,4 +1,8 @@
-package cl.esucar.tutor
+package cl.esucar.tutor.data.local
+
+import cl.esucar.tutor.domain.model.*
+import cl.esucar.tutor.domain.validacion.*
+import cl.esucar.tutor.domain.repository.*
 
 /** Contenido ilustrativo para el MVP; requiere validación del docente antes de uso académico real. */
 object Catalog {

@@ -1,4 +1,9 @@
-package cl.esucar.tutor
+package cl.esucar.tutor.data.remote
+
+import cl.esucar.tutor.data.repository.Repository
+import cl.esucar.tutor.domain.model.*
+import cl.esucar.tutor.domain.validacion.*
+import cl.esucar.tutor.domain.repository.*
 
 import android.app.job.*
 import android.content.ComponentName

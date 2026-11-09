@@ -2,9 +2,23 @@
 
 Aplicación Android escrita en **Kotlin**, preparada para **Android Studio**, basada en el caso académico DSY1105: acompañamiento de estudiantes en Trabajo de Título I, II y III.
 
+## Equipo y planificación
+
+- Integrante 1: pendiente de confirmar por el equipo.
+- Integrante 2: pendiente de confirmar por el equipo.
+- Número de equipo: pendiente de confirmar.
+- [Tablero Trello ESUCAR](https://trello.com/b/wgburVCk/esucar).
+- [Matriz completa de la rúbrica](docs/RUBRICA.md), [arquitectura MVVM](docs/ARQUITECTURA.md) y [planificación](docs/PLANIFICACION.md).
+
+La versión 1.1.0 completa las mejoras técnicas de la Evaluación Parcial 2. Quedan pendientes la identificación de integrantes, su participación real y las validaciones en dispositivo indicadas en la matriz. No se han realizado entregas en AVA.
+
 ## Funcionalidades
 
 - Inicio con progreso, próximo hito y alertas de fechas vencidas.
+- MVVM con `TutorViewModel`, `StateFlow` y separación de datos, dominio, presentación y recursos nativos.
+- Formularios con iconos, mensajes por campo y validaciones centralizadas; conserva borradores al recrear la pantalla.
+- Transiciones de pantalla, barras animadas y retroalimentación de errores; respeta las animaciones desactivadas de Android.
+- Integración con calendario mediante un borrador de evento que el usuario confirma.
 - Seis etapas: planteamiento, marco teórico, diseño metodológico, recogida de información, análisis e informe final.
 - Orientación paso a paso, formato requerido y criterios de revisión por etapa.
 - Listas de avance, notas con guardado automático y documento local vinculado mediante el selector de Android.
@@ -74,17 +88,28 @@ Se programa un aviso aproximado a las 09:00 del día anterior a una entrega. Si 
 
 ```text
 app/src/main/java/cl/esucar/tutor/
-  MainActivity.kt        Pantallas y navegación con Android Views
-  Domain.kt              Modelos, reglas de transición y búsqueda
-  Catalog.kt             Guías y preguntas de ejemplo
-  Repository.kt          Persistencia local y validación del contenido remoto
-  Reminders.kt           Alarmas, notificaciones y reinicio
-  ContentSyncService.kt  Descarga HTTPS y trabajo con conectividad
-app/src/test/             Pruebas unitarias de reglas del dominio
-docs/                     Matriz del caso y plan de pruebas manuales
+MainActivity.kt              Punto de entrada (6 líneas)
+TutorApp.kt                  Inicio y contenedor de la aplicación
+data/
+  local/Catalog.kt           Guías y FAQ incluidas
+  repository/Repository.kt  Persistencia local
+  remote/ContentSyncService.kt  Actualización HTTPS
+di/AppContainer.kt          Construcción e inyección de dependencias
+domain/
+  model/Domain.kt            Modelos y reglas de estados
+  repository/TutorStore.kt   Contrato del repositorio
+  validacion/FormValidator.kt  Validaciones puras
+nativo/                     Documentos, calendario y notificaciones
+ui/
+  components/               Campos, controles y animaciones compartidas
+  estudiante/               InicioScreen, GuiaScreen, EtapaScreen, AyudaScreen
+  profesor/RevisionScreen.kt  Formulario y revisión docente
+  perfil/PerfilScreen.kt     Perfil y ajustes
+  navegacion/               Host de pantallas, navegación y ViewModel
+  theme/TutorTheme.kt        Paleta de colores
 ```
 
-Se usa una Activity, vistas nativas, SharedPreferences para el pequeño conjunto local y JobScheduler/AlarmManager del sistema. La interfaz está en español. No se requieren Firebase, claves API ni bibliotecas de interfaz externas.
+Se usa ComponentActivity de AndroidX y vistas nativas, ViewModel/StateFlow para la lógica y estado, SharedPreferences para el pequeño conjunto local y JobScheduler/AlarmManager del sistema. La interfaz está en español. No se requieren Firebase ni claves API. Las pruebas de integración usan Robolectric 4.17 y descargan su Android simulado en la primera ejecución.
 
 ## Alcance y limitaciones
 
@@ -96,4 +121,6 @@ No incluyas datos personales u operativos sensibles en la demostración. El repo
 
 ## Verificación
 
-Se ejecutaron `assembleDebug`, `testDebugUnitTest` y `lintDebug`: compilación correcta, **5 pruebas unitarias aprobadas** y **0 errores de lint**. Las advertencias restantes se refieren a internacionalización, persistencia y respaldo de Android. Consulta [docs/PRUEBAS.md](docs/PRUEBAS.md) para la cobertura y el recorrido manual pendiente de validación en dispositivo.
+Versión 1.1.0: APK debug generado, **27 pruebas aprobadas** (21 de lógica/estado y 6 de integración con Android API 35 simulado) y **0 errores de lint**. No se ocultaron las advertencias con una baseline. Se comprobaron campos inválidos y recuperación, borradores al recrear Activity, entrega/aprobación, persistencia, permisos de notificaciones y los intents de documentos/calendario.
+
+El emulador no pudo arrancar por la configuración de aceleración de Windows. Las pruebas Robolectric no reemplazan la verificación de hardware: quedan por ejecutar los casos manuales de [docs/PRUEBAS.md](docs/PRUEBAS.md). El APK puede probarse en un teléfono Android 8.0 o superior.

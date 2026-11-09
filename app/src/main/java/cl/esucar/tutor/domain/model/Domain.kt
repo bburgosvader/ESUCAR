@@ -1,4 +1,5 @@
-package cl.esucar.tutor
+package cl.esucar.tutor.domain.model
+
 
 import java.text.Normalizer
 import java.time.LocalDate
